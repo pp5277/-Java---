@@ -19,8 +19,25 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "cross-spawn": "^7.0.6",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "postcss": "^8.5.3"
+  },
+  "overrides": {
+    "postcss": "^8.4.31",
+    "@vue/cli-service": {
+      "postcss": "^8.4.31"
+    },
+    "@vue/component-compiler-utils": {
+      "postcss": "^8.4.31"
+    },
+    "css-loader": {
+      "postcss": "^8.4.31"
+    },
+    "css-minimizer-webpack-plugin": {
+      "postcss": "^8.4.31"
+    }
   },
   "eslintConfig": {
     "root": true,
@@ -35,6 +52,10 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {}
+  },
+  "resolutions": {
+    "postcss": ">=8.4.31",
+    "cross-spawn": ">=6.0.6"
   },
   "browserslist": [
     "> 1%",
