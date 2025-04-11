@@ -12,5 +12,5 @@ import com.example.backend.model.bo.Employee;
 public interface EmployeeRepository<T> extends JpaRepository<Employee, String> {
 	
 	@Procedure(name = "GetEmployeeSeatingInfo")
-    List<T> getEmployeeSeatingInfo();
+    List<Employee> getEmployeeSeatingInfo();
 }

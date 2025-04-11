@@ -5,7 +5,14 @@ spring:
     password: sa
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
-    database-platform: org.hibernate.dialect.SQLServerDialect
+    database-platform: org.hibernate.dialect.SQLServerDialect # SQL Server dialect
     hibernate:
-      ddl-auto: none
-    show-sql: true
+      ddl-auto: none # Disable automatic schema management
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    show-sql: true # Show SQL queries
+    properties:
+      hibernate:
+        format_sql: true
+        globally_quoted_identifiers: true

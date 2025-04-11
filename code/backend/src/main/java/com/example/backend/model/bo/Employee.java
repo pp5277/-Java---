@@ -3,6 +3,9 @@ package com.example.backend.model.bo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +22,9 @@ public class Employee {
     @Column(name = "EMAIL")
     private String email;
     
-    @Column(name = "FLOOR_SEAT_SEQ")
-    private Integer floorSeatSeq; 
+    @ManyToOne
+    @JoinColumn(name = "FLOOR_SEAT_SEQ", referencedColumnName = "FLOOR_SEAT_SEQ")
+    private SeatingChart seatingChart;
     
 
     // Getters and Setters
@@ -48,12 +52,12 @@ public class Employee {
         this.email = email;
     }
 
-	public Integer getFloorSeatSeq() {
-		return floorSeatSeq;
+	public SeatingChart getSeatingChart() {
+		return seatingChart;
 	}
 
-	public void setFloorSeatSeq(Integer floorSeatSeq) {
-		this.floorSeatSeq = floorSeatSeq;
+	public void setSeatingChart(SeatingChart seatingChart) {
+		this.seatingChart = seatingChart;
 	}
 
     

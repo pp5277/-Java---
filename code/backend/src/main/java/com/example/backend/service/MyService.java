@@ -7,20 +7,33 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.model.bo.EmpSeat;
+import com.example.backend.model.bo.Employee;
+import com.example.backend.model.bo.SeatingChart;
 import com.example.backend.repository.EmployeeRepository;
+import com.example.backend.repository.SeatingChartRepository;
 
 @Service
 public class MyService {
 
     @Autowired
-    private EmployeeRepository<EmpSeat> employeeRepository;
+    private EmployeeRepository<Employee> employeeRepository;
+    @Autowired
+    private SeatingChartRepository seatingChartRepository;
 
     @Transactional
-    public List<EmpSeat> getEmployeeSeatingInfo() {
-        List<EmpSeat> results = employeeRepository.getEmployeeSeatingInfo();
-        // 這裡你可以將結果轉換為 Employee 物件
-        // 可以使用自定義的邏輯來處理結果
-        return results;
+    public List<Employee> getEmployeeSeatingInfo() {
+        return employeeRepository.getEmployeeSeatingInfo();
     }
+    
+    @Transactional
+    public List<Employee> getAllEmployees() {
+    	return employeeRepository.findAll();
+    }
+    
+    @Transactional
+    public void saveseatingInfo(SeatingChart bo) {
+    	seatingChartRepository.save(bo);
+    }
+    
+    
 }
