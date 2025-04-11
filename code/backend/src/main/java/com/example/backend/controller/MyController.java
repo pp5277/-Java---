@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.model.bo.Employee;
@@ -31,7 +32,14 @@ public class MyController {
     }
     
     @PostMapping("api/seatchart")
-    public void saveSeatchart(SeatingChart bo){
+    public void saveSeatchart(@RequestBody SeatingChart bo){
+    	myService.saveseatingInfo(bo);
+    }
+    
+    @PostMapping("api/cancelseatchart")
+    public void cancelSeatchart(@RequestBody SeatingChart bo){
+    	bo.setFloorNo(0);
+    	bo.setSeatNo(0);
     	myService.saveseatingInfo(bo);
     }
 }

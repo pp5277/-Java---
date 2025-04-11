@@ -35,5 +35,8 @@ public class MyService {
     	seatingChartRepository.save(bo);
     }
     
-    
+    @Transactional
+    public void cancelseatingInfo(SeatingChart bo) {
+    	seatingChartRepository.save(bo);
+    }
 }

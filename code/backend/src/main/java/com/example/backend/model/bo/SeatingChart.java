@@ -12,12 +12,9 @@ import javax.persistence.Table;
 public class SeatingChart implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
     @Id
-    @Column(name = "SYSID")
-    private Long sysid;
-    
-    @Column(name = "FLOOR_SEAT_SEQ", unique = true)
+    @Column(name = "FLOOR_SEAT_SEQ")
     private int floorSeatSeq;
 
     @Column(name = "FLOOR_NO")
@@ -26,25 +23,15 @@ public class SeatingChart implements Serializable{
     @Column(name = "SEAT_NO")
     private int seatNo;
     
+	// Getters and Setters
+    
     
 	public int getFloorSeatSeq() {
 		return floorSeatSeq;
 	}
-
-	// Getters and Setters
-	
-	
 	
 	public void setFloorSeatSeq(int floorSeatSeq) {
 		this.floorSeatSeq = floorSeatSeq;
-	}
-
-	public Long getSysid() {
-		return sysid;
-	}
-
-	public void setSysid(Long sysid) {
-		this.sysid = sysid;
 	}
 
 	public int getFloorNo() {
