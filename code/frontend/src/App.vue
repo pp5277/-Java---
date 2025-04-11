@@ -29,7 +29,7 @@
           v-for="seat in row"
           :key="seat.id"
           class="w-88 h-28 min-w-[11rem] min-h-[7rem] border rounded-lg shadow-sm text-sm text-center font-medium flex flex-col justify-center items-center whitespace-pre-line transition-all"
-          :class="getSeatClass(seat)"
+          :style="getSeatStyle(seat)"
           @click="selectSeat(seat)"
           :disabled="seat.employee !== null"
         >
@@ -42,6 +42,31 @@
       </div>
     </div>
 
+    <div class="mb-4 p-4 border rounded bg-gray-50 flex items-center justify-start space-x-6">
+      <div class="font-bold text-gray-800">座位狀態說明:</div>
+      <div class="flex items-center">
+        <div 
+          style="display: inline-block; width: 16px; height: 16px; background-color: white; border: 1px solid #d1d5db; vertical-align: middle;" 
+          class="rounded"
+        ></div>
+        <span style="display: inline-block; margin-left: 8px; vertical-align: middle;">空位</span>
+      </div>
+      <div class="flex items-center">
+        <div 
+          style="display: inline-block; width: 16px; height: 16px; background-color: #fecaca; border: 1px solid #ef4444; vertical-align: middle;" 
+          class="rounded"
+        ></div>
+        <span style="display: inline-block; margin-left: 8px; vertical-align: middle;">已占用</span>
+      </div>
+      <div class="flex items-center">
+        <div 
+          style="display: inline-block; width: 16px; height: 16px; background-color: #bbf7d0; border: 1px solid #4ade80; vertical-align: middle;" 
+          class="rounded"
+        ></div>
+        <span style="display: inline-block; margin-left: 8px; vertical-align: middle;">已選擇</span>
+      </div>
+    </div>
+
     <div v-if="selectedSeat || selectedEmployee" class="mb-6 p-4 border rounded bg-gray-100">
       <h2 class="font-bold mb-2 text-gray-800">當前選擇:</h2>
       <div v-if="selectedSeat">座位: {{ selectedSeat.id }}</div>
@@ -51,7 +76,14 @@
     <div class="flex space-x-4">
       <button 
         @click="submitSeatAssignment"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+        :style="{
+          backgroundColor: canSubmit ? '#2563eb' : '#93c5fd',
+          color: 'white',
+          fontWeight: 'bold',
+          padding: '0.5rem 1.5rem',
+          borderRadius: '0.25rem',
+          cursor: canSubmit ? 'pointer' : 'not-allowed'
+        }"
         :disabled="!canSubmit"
       >
         分配座位
@@ -59,7 +91,14 @@
 
       <button 
         @click="cancelSeatAssignment"
-        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+        :style="{
+          backgroundColor: selectedEmployee ? '#dc2626' : '#fca5a5',
+          color: 'white',
+          fontWeight: 'bold',
+          padding: '0.5rem 1.5rem',
+          borderRadius: '0.25rem',
+          cursor: selectedEmployee ? 'pointer' : 'not-allowed'
+        }"
         :disabled="!selectedEmployee"
       >
         取消分配
@@ -152,13 +191,27 @@ export default {
       this.selectedSeat = seat;
     },
 
-    getSeatClass(seat) {
+    getSeatStyle(seat) {
       if (seat.employee) {
-        return 'bg-red-200 text-red-800 cursor-not-allowed';
+        return {
+          backgroundColor: '#fecaca', 
+          color: '#991b1b',         
+          borderColor: '#ef4444',   
+          cursor: 'not-allowed'
+        };
       } else if (this.selectedSeat && this.selectedSeat.id === seat.id) {
-        return 'bg-green-200 border-green-300';
+        return {
+          backgroundColor: '#bbf7d0', 
+          color: '#166534',         
+          borderColor: '#4ade80'     
+        };
       } else {
-        return 'bg-white hover:bg-gray-100 border-gray-300';
+        return {
+          backgroundColor: 'white',
+          color: '#374151',         
+          borderColor: '#d1d5db',   
+          cursor: 'pointer'
+        };
       }
     },
 
